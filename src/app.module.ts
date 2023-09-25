@@ -9,6 +9,12 @@ import { EstadoModule } from './estado/estado.module';
 import { MunicipioModule } from './municipio/municipio.module';
 import { EnderecoModule } from './endereco/endereco.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServidorModule } from './servidor/servidor.module';
+import { TerceirizadoModule } from './terceirizado/terceirizado.module';
+import { PessoaFisicaModule } from './pessoa-fisica/pessoa-fisica.module';
+import { TelefoneModule } from './telefone/telefone.module';
+import { UnidadeModule } from './unidade/unidade.module';
+import { FuncaoModule } from './funcao/funcao.module';
 
 @Module({
   imports: [
@@ -25,6 +31,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    ServidorModule,
+    TerceirizadoModule,
+    PessoaFisicaModule,
+    TelefoneModule,
+    UnidadeModule,
+    FuncaoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

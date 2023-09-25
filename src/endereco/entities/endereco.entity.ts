@@ -10,6 +10,4 @@ export class Endereco extends BaseEntity {
 
   @IsString()
   logradouro: string;
-
-  @
 }
