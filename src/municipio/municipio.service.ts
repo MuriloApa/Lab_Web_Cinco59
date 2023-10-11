@@ -1,26 +1,66 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMunicipioDto } from './dto/create-municipio.dto';
 import { UpdateMunicipioDto } from './dto/update-municipio.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { FindManyOptions, ILike, Repository } from 'typeorm';
+import { Municipio } from './entities/municipio.entity';
+import {
+  IPaginationOptions,
+  Pagination,
+  paginate,
+} from 'nestjs-typeorm-paginate';
+import { RecordnotfoundException } from '@exceptions';
 
 @Injectable()
 export class MunicipioService {
-  create(createMunicipioDto: CreateMunicipioDto) {
-    return 'This action adds a new municipio';
+  constructor(
+    @InjectRepository(Municipio)
+    private readonly repository: Repository<Municipio>,
+  ) {}
+
+  create(createMunicipioDto: CreateMunicipioDto): Promise<Municipio> {
+    const municipio = this.repository.create(createMunicipioDto);
+    return this.repository.save(municipio);
   }
 
-  findAll() {
-    return `This action returns all municipio`;
+  findAll(
+    options: IPaginationOptions,
+    search?: string,
+  ): Promise<Pagination<Municipio>> {
+    const where: FindManyOptions<Municipio> = {};
+
+    if (search) {
+      where.where = [{ nome: ILike(`%${search}%`) }];
+    }
+
+    return paginate<Municipio>(this.repository, options, where);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} municipio`;
+  async findOne(id: number): Promise<Municipio> {
+    const municipio = await this.repository.findOneBy({ id });
+
+    if (!municipio) {
+      throw new RecordnotfoundException();
+    }
+
+    return municipio;
   }
 
-  update(id: number, updateMunicipioDto: UpdateMunicipioDto) {
-    return `This action updates a #${id} municipio`;
+  async update(
+    id: number,
+    updateMunicipioDto: UpdateMunicipioDto,
+  ): Promise<Municipio> {
+    await this.repository.update(id, updateMunicipioDto);
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} municipio`;
+  async remove(id: number): Promise<boolean> {
+    const municipio = await this.repository.delete(id);
+
+    if (!municipio?.affected) {
+      throw new RecordnotfoundException();
+    }
+
+    return true;
   }
 }
