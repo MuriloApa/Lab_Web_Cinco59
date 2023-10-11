@@ -1,34 +1,52 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { PaisService } from './pais.service';
-import { CreatePaiDto } from './dto/create-pai.dto';
-import { UpdatePaiDto } from './dto/update-pai.dto';
+import { CreatePaisDto } from './dto/create-pais.dto';
+import { UpdatePaisDto } from './dto/update-pais.dto';
 
 @Controller('pais')
 export class PaisController {
   constructor(private readonly paisService: PaisService) {}
 
   @Post()
-  create(@Body() createPaiDto: CreatePaiDto) {
+  create(@Body() createPaiDto: CreatePaisDto) {
     return this.paisService.create(createPaiDto);
   }
 
   @Get()
-  findAll() {
-    return this.paisService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query('search') search: string,
+  ) {
+    return this.paisService.findAll({ page, limit }, search);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.paisService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.paisService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePaiDto: UpdatePaiDto) {
-    return this.paisService.update(+id, updatePaiDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updatePaiDto: UpdatePaisDto,
+  ) {
+    return this.paisService.update(id, updatePaiDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.paisService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.paisService.remove(id);
   }
 }
