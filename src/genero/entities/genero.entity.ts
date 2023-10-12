@@ -1,5 +1,9 @@
 import { BaseEntity } from 'src/shared/entities';
-import { Entity } from 'typeorm';
+import { Column, Entity, Unique } from 'typeorm';
 
 @Entity()
-export class Genero extends BaseEntity {}
+@Unique(['nome'])
+export class Genero extends BaseEntity {
+  @Column()
+  nome: string;
+}

@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TelefoneService } from './telefone.service';
-import { TelefoneController } from './telefone.controller';
 
 @Module({
-  controllers: [TelefoneController],
+  controllers: [],
   providers: [TelefoneService],
 })
 export class TelefoneModule {}

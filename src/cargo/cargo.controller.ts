@@ -1,4 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CargoService } from './cargo.service';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
@@ -13,22 +24,29 @@ export class CargoController {
   }
 
   @Get()
-  findAll() {
-    return this.cargoService.findAll();
+  findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+    @Query('search') search: string,
+  ) {
+    return this.cargoService.findAll({ page, limit }, search);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cargoService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.cargoService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCargoDto: UpdateCargoDto) {
-    return this.cargoService.update(+id, updateCargoDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateCargoDto: UpdateCargoDto,
+  ) {
+    return this.cargoService.update(id, updateCargoDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cargoService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.cargoService.remove(id);
   }
 }

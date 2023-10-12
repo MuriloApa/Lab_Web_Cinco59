@@ -1,17 +1,15 @@
-import { IsString, MinLength, IsInt } from 'class-validator';
 import { BaseEntity } from 'src/shared/entities';
-import { Entity } from 'typeorm';
+import { Column, Entity, Unique } from 'typeorm';
 
 @Entity()
+@Unique(['nome'])
 export class Cargo extends BaseEntity {
-  @IsString()
-  @MinLength(3)
+  @Column()
   nome: string;
 
-  @IsString()
-  @MinLength(2)
+  @Column()
   sigla: string;
 
-  @IsInt()
+  @Column()
   ordenacaoForcada: number;
 }

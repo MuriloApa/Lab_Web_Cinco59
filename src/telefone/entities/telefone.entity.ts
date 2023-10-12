@@ -1,3 +1,4 @@
+import { BaseEntity } from 'src/shared/entities';
 import { Column, Entity } from 'typeorm';
 
 export enum TipoTelefone {
@@ -8,7 +9,7 @@ export enum TipoTelefone {
 }
 
 @Entity()
-export class Telefone {
+export class Telefone extends BaseEntity {
   @Column()
   numero: string;
 

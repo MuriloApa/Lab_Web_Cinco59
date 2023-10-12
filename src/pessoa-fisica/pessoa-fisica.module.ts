@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PessoaFisicaService } from './pessoa-fisica.service';
-import { PessoaFisicaController } from './pessoa-fisica.controller';
+import { EnderecoModule } from 'src/endereco/endereco.module';
+import { TelefoneModule } from 'src/telefone/telefone.module';
 
 @Module({
-  controllers: [PessoaFisicaController],
-  providers: [PessoaFisicaService],
+  imports: [EnderecoModule, TelefoneModule],
 })
 export class PessoaFisicaModule {}
