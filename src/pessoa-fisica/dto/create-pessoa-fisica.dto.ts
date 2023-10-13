@@ -4,6 +4,7 @@ import {
   IsDate,
   IsDefined,
   IsNotEmpty,
+  IsNotEmptyObject,
   IsObject,
   IsOptional,
   IsString,
@@ -11,6 +12,9 @@ import {
   MinLength,
   ValidateNested,
 } from 'class-validator';
+import { Cargo } from 'src/cargo/entities/cargo.entity';
+import { CreateEmailDto } from 'src/email/dto/create-email.dto';
+import { Email } from 'src/email/entities/email.entity';
 import { CreateEnderecoDto } from 'src/endereco/dto/create-endereco.dto';
 import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
@@ -58,4 +62,16 @@ export class CreatePessoaFisicaDto {
   @IsArray()
   @IsOptional()
   telefones?: Telefone[];
+
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
+  @IsObject()
+  @IsNotEmptyObject()
+  cargo: Cargo;
+
+  @ValidateNested({ each: true })
+  @Type(() => CreateEmailDto)
+  @IsArray()
+  @IsOptional()
+  email?: Email[];
 }

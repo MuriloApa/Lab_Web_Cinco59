@@ -1,9 +1,19 @@
+import { Cargo } from 'src/cargo/entities/cargo.entity';
+import { Email } from 'src/email/entities/email.entity';
 import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
 import { BaseEntity } from 'src/shared/entities';
 import { Telefone } from 'src/telefone/entities/telefone.entity';
-import { Column, JoinTable, ManyToMany, ManyToOne } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
 
+@Entity()
 export class PessoaFisica extends BaseEntity {
   @Column()
   cpf: string;
@@ -38,4 +48,10 @@ export class PessoaFisica extends BaseEntity {
   })
   @JoinTable({ name: 'telefones_pessoa_fisica' })
   telefones?: Telefone[];
+
+  @ManyToOne(() => Cargo, (cargo) => cargo.pessoas, { eager: true })
+  cargo: Cargo;
+
+  @OneToMany(() => Email, (email) => email.proprietario, { eager: true })
+  emails?: Email[];
 }
