@@ -19,6 +19,8 @@ export class CreateEmailDto {
 
   @IsArray()
   @IsNotEmptyObject()
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
   usuarios_unidade?: PessoaFisica[];
 
   @IsEnum(TipoEmail)

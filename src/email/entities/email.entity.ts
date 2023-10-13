@@ -13,7 +13,13 @@ export class Email extends BaseEntity {
   @Column()
   endereco: string;
 
-  @Column()
+  @Column('text', {
+    array: true,
+    transformer: {
+      to: (objeto: any[]) => JSON.stringify(objeto),
+      from: (texto_json: string) => JSON.parse(texto_json),
+    },
+  })
   usuarios_unidade?: PessoaFisica[];
 
   @Column({ type: 'varchar', enum: TipoEmail, default: TipoEmail.PROFISSIONAL })
