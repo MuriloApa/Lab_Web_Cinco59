@@ -69,9 +69,9 @@ export class CreatePessoaFisicaDto {
   @IsNotEmptyObject()
   cargo: Cargo;
 
-  @ValidateNested({ each: true })
+  @ValidateNested()
   @Type(() => CreateEmailDto)
   @IsArray()
   @IsOptional()
-  email?: Email[];
+  emails?: Email[];
 }
