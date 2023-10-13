@@ -51,27 +51,29 @@ export class CreatePessoaFisicaDto {
   @Length(2)
   tipoSanguineo: string;
 
-  @ValidateNested({ each: true })
-  @Type(() => CreateEnderecoDto)
-  @IsArray()
-  @IsOptional()
-  enderecos?: Endereco[];
-
-  @ValidateNested({ each: true })
-  @Type(() => CreateTelefoneDto)
-  @IsArray()
-  @IsOptional()
-  telefones?: Telefone[];
-
   @ValidateNested()
   @Type(() => RelationEntityDto)
   @IsObject()
   @IsNotEmptyObject()
   cargo: Cargo;
 
-  @ValidateNested()
+  /* @ValidateNested({ each: true })
+  @Type(() => CreateEnderecoDto)
+  @IsArray()
+  @IsOptional()
+  enderecos?: Endereco[]; */
+
+  /* @ValidateNested({ each: true })
+  @Type(() => CreateTelefoneDto)
+  @IsArray()
+  @IsOptional()
+  telefones?: Telefone[]; */
+
+  
+
+  /* @ValidateNested()
   @Type(() => CreateEmailDto)
   @IsArray()
   @IsOptional()
-  emails?: Email[];
+  emails?: Email[]; */
 }

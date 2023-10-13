@@ -45,7 +45,9 @@ export class TerceirizadoService {
 
     terceirizado.emails = [];
     createTerceirizadoDto.emails.forEach((email) => {
-      terceirizado.emails.push(this.emailRepository.create(email));
+      const e_mail = this.emailRepository.create(email);
+      terceirizado.emails.push(e_mail);
+      this.emailRepository.save(e_mail);
     });
 
     return this.repository.save(terceirizado);

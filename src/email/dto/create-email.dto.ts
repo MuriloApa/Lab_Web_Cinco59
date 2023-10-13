@@ -1,24 +1,27 @@
 import {
   IsArray,
+  IsDefined,
   IsEmail,
   IsEnum,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
+  IsOptional,
   ValidateNested,
 } from 'class-validator';
 import { PessoaFisica } from 'src/pessoa-fisica/entities/pessoa-fisica.entity';
 import { TipoEmail } from '../entities/email.entity';
 import { Type } from 'class-transformer';
 import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
+import { Terceirizado } from 'src/terceirizado/entities/terceirizado.entity';
 
 export class CreateEmailDto {
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  endereco: string;
 
   @IsArray()
-  @IsNotEmptyObject()
+  @IsOptional()
   @ValidateNested()
   @Type(() => RelationEntityDto)
   usuarios_unidade?: PessoaFisica[];
@@ -30,6 +33,7 @@ export class CreateEmailDto {
   @ValidateNested()
   @Type(() => RelationEntityDto)
   @IsObject()
+  @IsDefined()
   @IsNotEmptyObject()
-  proprietario: PessoaFisica;
+  proprietario: Terceirizado;
 }

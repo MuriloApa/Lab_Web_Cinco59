@@ -33,25 +33,23 @@ export class PessoaFisica extends BaseEntity {
   @Column({ nullable: true })
   tipoSanguineo: string;
 
-  @ManyToMany(() => Endereco, {
+  /* @ManyToMany(() => Endereco, {
     cascade: true,
     eager: true,
     onDelete: 'CASCADE',
   })
   @JoinTable({ name: 'enderecos_pessoa_fisica' })
-  enderecos?: Endereco[];
+  enderecos?: Endereco[]; */
 
-  @ManyToMany(() => Telefone, {
+  /* @ManyToMany(() => Telefone, {
     cascade: true,
     eager: true,
     onDelete: 'CASCADE',
   })
   @JoinTable({ name: 'telefones_pessoa_fisica' })
-  telefones?: Telefone[];
+  telefones?: Telefone[]; */
 
   @ManyToOne(() => Cargo, (cargo) => cargo.pessoas, { eager: true })
   cargo: Cargo;
 
-  @OneToMany(() => Email, (email) => email.proprietario, { eager: true })
-  emails?: Email[];
 }
