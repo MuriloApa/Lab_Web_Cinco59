@@ -1,7 +1,7 @@
 import { PessoaFisica } from 'src/pessoa-fisica/entities/pessoa-fisica.entity';
 import { BaseEntity } from 'src/shared/entities';
 import { Terceirizado } from 'src/terceirizado/entities/terceirizado.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, Unique } from 'typeorm';
 
 export enum TipoEmail {
   PROFISSIONAL = 'Profissional',
@@ -10,6 +10,7 @@ export enum TipoEmail {
 }
 
 @Entity()
+@Unique(['endereco'])
 export class Email extends BaseEntity {
   @Column()
   endereco: string;
