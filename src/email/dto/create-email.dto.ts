@@ -1,10 +1,8 @@
 import {
   IsArray,
-  IsDefined,
   IsEmail,
   IsEnum,
   IsNotEmpty,
-  IsNotEmptyObject,
   IsObject,
   IsOptional,
   ValidateNested,
@@ -33,7 +31,6 @@ export class CreateEmailDto {
   @ValidateNested()
   @Type(() => RelationEntityDto)
   @IsObject()
-  @IsDefined()
-  @IsNotEmptyObject()
-  proprietario: Terceirizado;
+  @IsOptional()
+  proprietario?: Terceirizado;
 }

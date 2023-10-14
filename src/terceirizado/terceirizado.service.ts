@@ -34,23 +34,30 @@ export class TerceirizadoService {
     terceirizado.ativo = true;
 
     terceirizado.enderecos = [];
-    createTerceirizadoDto.enderecos.forEach((endereco) => {
+    createTerceirizadoDto.enderecos?.forEach((endereco) => {
       terceirizado.enderecos.push(this.enderecoRepository.create(endereco));
     });
 
     terceirizado.telefones = [];
-    createTerceirizadoDto.telefones.forEach((telefone) => {
+    createTerceirizadoDto.telefones?.forEach((telefone) => {
       terceirizado.telefones.push(this.telefoneRepository.create(telefone));
     });
 
     terceirizado.emails = [];
-    createTerceirizadoDto.emails.forEach((email) => {
+    createTerceirizadoDto.emails?.forEach((email) => {
       const e_mail = this.emailRepository.create(email);
       terceirizado.emails.push(e_mail);
       this.emailRepository.save(e_mail);
     });
 
-    return this.repository.save(terceirizado);
+    const proprietario = await this.repository.save(terceirizado);
+    proprietario.emails.forEach((email) => {
+      this.emailRepository.update(
+        { endereco: email.endereco },
+        { proprietario: proprietario },
+      );
+    });
+    return proprietario;
   }
 
   findAll(
