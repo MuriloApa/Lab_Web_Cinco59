@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString, MinLength } from 'class-validator';
 
-export class CreateIndiponibilidadeDto {
+export class CreateIndisponibilidadeDto {
   @IsString()
   @IsNotEmpty()
   @MinLength(3)

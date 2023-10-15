@@ -40,6 +40,6 @@ export class PessoaFisica extends BaseEntity {
   @Column({ type: 'varchar', enum: TipoSanguineo, nullable: true })
   tipoSanguineo: string;
 
-  @ManyToOne(() => Cargo, (cargo) => cargo.pessoas, { eager: true })
+  @ManyToOne(() => Cargo, { eager: true })
   cargo: Cargo;
 }

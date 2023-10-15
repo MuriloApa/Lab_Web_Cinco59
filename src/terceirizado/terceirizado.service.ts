@@ -31,7 +31,6 @@ export class TerceirizadoService {
     createTerceirizadoDto: CreateTerceirizadoDto,
   ): Promise<Terceirizado> {
     const terceirizado = this.repository.create(createTerceirizadoDto);
-    terceirizado.ativo = true;
 
     terceirizado.enderecos = [];
     createTerceirizadoDto.enderecos?.forEach((endereco) => {
@@ -54,7 +53,7 @@ export class TerceirizadoService {
     proprietario.emails.forEach((email) => {
       this.emailRepository.update(
         { endereco: email.endereco },
-        { proprietario: proprietario },
+        { proprietarioTerceirizado: proprietario },
       );
     });
     return proprietario;
@@ -64,7 +63,7 @@ export class TerceirizadoService {
     options: IPaginationOptions,
     search: string,
   ): Promise<Pagination<Terceirizado>> {
-    const where: FindManyOptions = {};
+    const where: FindManyOptions<Terceirizado> = {};
 
     if (search) {
       where.where = [

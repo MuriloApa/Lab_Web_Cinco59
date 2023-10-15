@@ -3,6 +3,7 @@ import {
   IsInt,
   IsNotEmpty,
   IsString,
+  IsUppercase,
   MinLength,
 } from 'class-validator';
 
@@ -14,6 +15,7 @@ export class CreateCargoDto {
 
   @IsString()
   @MinLength(2)
+  @IsUppercase()
   sigla: string;
 
   @IsInt()

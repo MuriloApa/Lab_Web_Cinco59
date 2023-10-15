@@ -26,7 +26,7 @@ export class FuncaoService {
     options: IPaginationOptions,
     search: string,
   ): Promise<Pagination<Funcao>> {
-    const where: FindManyOptions = {};
+    const where: FindManyOptions<Funcao> = {};
 
     if (search) {
       where.where = [{ nome: ILike(`%${search}%`) }];

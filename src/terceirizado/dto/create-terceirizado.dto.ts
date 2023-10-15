@@ -1,8 +1,11 @@
 import {
   IsArray,
   IsBoolean,
+  IsDefined,
   IsInt,
   IsNotEmpty,
+  IsNotEmptyObject,
+  IsObject,
   IsOptional,
   IsString,
   ValidateNested,
@@ -15,6 +18,8 @@ import { CreateTelefoneDto } from 'src/telefone/dto/create-telefone.dto';
 import { Telefone } from 'src/telefone/entities/telefone.entity';
 import { CreateEmailDto } from 'src/email/dto/create-email.dto';
 import { Email } from 'src/email/entities/email.entity';
+import { Servidor } from 'src/servidor/entities/servidor.entity';
+import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 
 export class CreateTerceirizadoDto extends CreatePessoaFisicaDto {
   @IsNotEmpty()
@@ -50,4 +55,11 @@ export class CreateTerceirizadoDto extends CreatePessoaFisicaDto {
   @IsArray()
   @IsOptional()
   emails?: Email[];
+
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
+  @IsDefined()
+  @IsObject()
+  @IsNotEmptyObject()
+  supervisor: Servidor;
 }

@@ -1,4 +1,5 @@
 import { PessoaFisica } from 'src/pessoa-fisica/entities/pessoa-fisica.entity';
+import { Servidor } from 'src/servidor/entities/servidor.entity';
 import { BaseEntity } from 'src/shared/entities';
 import { Terceirizado } from 'src/terceirizado/entities/terceirizado.entity';
 import { Column, Entity, ManyToOne, Unique } from 'typeorm';
@@ -28,6 +29,9 @@ export class Email extends BaseEntity {
   @Column({ type: 'varchar', enum: TipoEmail, default: TipoEmail.PROFISSIONAL })
   tipo: TipoEmail;
 
-  @ManyToOne(() => Terceirizado)
-  proprietario: Terceirizado;
+  @ManyToOne(() => Terceirizado, { nullable: true })
+  proprietarioTerceirizado: Terceirizado;
+
+  @ManyToOne(() => Servidor, { nullable: true })
+  proprietarioServidor: Servidor;
 }
