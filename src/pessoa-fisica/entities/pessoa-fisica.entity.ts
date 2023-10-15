@@ -1,17 +1,24 @@
 import { Cargo } from 'src/cargo/entities/cargo.entity';
-import { Email } from 'src/email/entities/email.entity';
-import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
 import { BaseEntity } from 'src/shared/entities';
-import { Telefone } from 'src/telefone/entities/telefone.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
+
+export enum TipoSanguineo {
+  A_POSITIVO = 'A+',
+  A_NEGATIVO = 'A-',
+  B_POSITIVO = 'B+',
+  B_NEGATIVO = 'B-',
+  AB_POSITIVO = 'AB+',
+  AB_NEGATIVO = 'AB-',
+  O_POSITIVO = 'O+',
+  O_NEGATIVO = 'O-',
+}
+
+export enum TipoSexo {
+  MASCULINO = 'Masculino',
+  FEMININO = 'Feminino',
+  NAO_DECLARADO = 'Não declarado',
+}
 
 @Entity()
 export class PessoaFisica extends BaseEntity {
@@ -24,32 +31,15 @@ export class PessoaFisica extends BaseEntity {
   @Column()
   dataNascimento: Date;
 
-  @Column()
+  @Column({ type: 'varchar', enum: TipoSexo })
   sexo: string;
 
   @ManyToOne(() => Genero, { eager: true })
   genero: Genero;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', enum: TipoSanguineo, nullable: true })
   tipoSanguineo: string;
-
-  /* @ManyToMany(() => Endereco, {
-    cascade: true,
-    eager: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinTable({ name: 'enderecos_pessoa_fisica' })
-  enderecos?: Endereco[]; */
-
-  /* @ManyToMany(() => Telefone, {
-    cascade: true,
-    eager: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinTable({ name: 'telefones_pessoa_fisica' })
-  telefones?: Telefone[]; */
 
   @ManyToOne(() => Cargo, (cargo) => cargo.pessoas, { eager: true })
   cargo: Cargo;
-
 }

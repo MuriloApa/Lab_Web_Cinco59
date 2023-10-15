@@ -1,8 +1,8 @@
 import { Type } from 'class-transformer';
 import {
-  IsArray,
   IsDate,
   IsDefined,
+  IsEnum,
   IsNotEmpty,
   IsNotEmptyObject,
   IsObject,
@@ -13,14 +13,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Cargo } from 'src/cargo/entities/cargo.entity';
-import { CreateEmailDto } from 'src/email/dto/create-email.dto';
-import { Email } from 'src/email/entities/email.entity';
-import { CreateEnderecoDto } from 'src/endereco/dto/create-endereco.dto';
-import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
 import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
-import { CreateTelefoneDto } from 'src/telefone/dto/create-telefone.dto';
-import { Telefone } from 'src/telefone/entities/telefone.entity';
+import { TipoSanguineo, TipoSexo } from '../entities/pessoa-fisica.entity';
 
 export class CreatePessoaFisicaDto {
   @IsString()
@@ -37,8 +32,8 @@ export class CreatePessoaFisicaDto {
   @IsNotEmpty()
   dataNascimento: Date;
 
-  @IsString()
-  @MinLength(3)
+  @IsEnum(TipoSexo)
+  @IsNotEmpty()
   sexo: string;
 
   @ValidateNested()
@@ -47,9 +42,9 @@ export class CreatePessoaFisicaDto {
   @IsDefined()
   genero: Genero;
 
-  @IsString()
-  @Length(2)
-  tipoSanguineo: string;
+  @IsEnum(TipoSanguineo)
+  @IsOptional()
+  tipoSanguineo?: string;
 
   @ValidateNested()
   @Type(() => RelationEntityDto)
@@ -68,8 +63,6 @@ export class CreatePessoaFisicaDto {
   @IsArray()
   @IsOptional()
   telefones?: Telefone[]; */
-
-  
 
   /* @ValidateNested()
   @Type(() => CreateEmailDto)

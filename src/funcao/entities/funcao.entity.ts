@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/shared/entities';
-import { Column, Entity, Unique } from 'typeorm';
+import { Telefone } from 'src/telefone/entities/telefone.entity';
+import { Column, Entity, JoinColumn, OneToOne, Unique } from 'typeorm';
 
 @Entity()
 @Unique(['nome'])
@@ -13,6 +14,13 @@ export class Funcao extends BaseEntity {
   @Column()
   exclusiva: boolean;
 
-  @Column({ nullable: true })
+  @Column()
   ordenacaoForcada: number;
+
+  @Column()
+  ativa: boolean;
+
+  @OneToOne(() => Telefone, { nullable: true })
+  @JoinColumn()
+  telefone?: Telefone;
 }

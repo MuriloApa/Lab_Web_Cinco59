@@ -1,4 +1,10 @@
-import { IsInt, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateCargoDto {
   @IsString()
@@ -12,4 +18,8 @@ export class CreateCargoDto {
 
   @IsInt()
   ordenacaoForcada: number;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  ativa: boolean;
 }

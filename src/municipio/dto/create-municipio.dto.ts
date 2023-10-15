@@ -5,6 +5,7 @@ import {
   IsNotEmptyObject,
   IsObject,
   IsString,
+  IsUppercase,
   Length,
   MinLength,
   ValidateNested,
@@ -19,7 +20,8 @@ export class CreateMunicipioDto {
   nome: string;
 
   @IsString()
-  @MinLength(2)
+  @Length(3, 3)
+  @IsUppercase()
   sigla: string;
 
   @IsString()

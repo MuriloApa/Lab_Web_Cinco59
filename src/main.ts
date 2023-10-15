@@ -1,9 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { UsuariosService } from './auth/usuarios/usuarios.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const usuarioService = app.get(UsuariosService);
+  usuarioService.usuario_padrao();
 
   const config = new DocumentBuilder()
     .setTitle('Projeto Cinco59')

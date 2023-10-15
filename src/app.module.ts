@@ -15,9 +15,15 @@ import { PessoaFisicaModule } from './pessoa-fisica/pessoa-fisica.module';
 import { TelefoneModule } from './telefone/telefone.module';
 import { UnidadeModule } from './unidade/unidade.module';
 import { FuncaoModule } from './funcao/funcao.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { IndiponibilidadesModule } from './indiponibilidades/indiponibilidades.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     GeneroModule,
     EmailModule,
     CargoModule,
@@ -37,8 +43,10 @@ import { FuncaoModule } from './funcao/funcao.module';
     TelefoneModule,
     UnidadeModule,
     FuncaoModule,
+    AuthModule,
+    IndiponibilidadesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService/* , { provide: APP_GUARD, useClass: JwtAuthGuard } */],
 })
 export class AppModule {}

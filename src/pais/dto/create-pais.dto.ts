@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsUppercase, MinLength } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsUppercase,
+  Length,
+  MinLength,
+} from 'class-validator';
 
 export class CreatePaisDto {
   @IsString()
@@ -7,7 +13,7 @@ export class CreatePaisDto {
   nome: string;
 
   @IsString()
-  @MinLength(2)
+  @Length(3, 3)
   @IsUppercase()
   sigla: string;
 
