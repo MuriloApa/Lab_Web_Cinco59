@@ -20,6 +20,8 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { IndisponibilidadesModule } from './indisponibilidades/indisponibilidades.module';
+import { AfastamentosModule } from './afastamentos/afastamentos.module';
+import { DesignacoesModule } from './designacoes/designacoes.module';
 
 @Module({
   imports: [
@@ -45,6 +47,8 @@ import { IndisponibilidadesModule } from './indisponibilidades/indisponibilidade
     FuncaoModule,
     AuthModule,
     IndisponibilidadesModule,
+    AfastamentosModule,
+    DesignacoesModule,
   ],
   controllers: [AppController],
   providers: [AppService/* , { provide: APP_GUARD, useClass: JwtAuthGuard } */],
