@@ -1,6 +1,7 @@
 import { Cargo } from 'src/cargo/entities/cargo.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
 import { BaseEntity } from 'src/shared/entities';
+import { Unidade } from 'src/unidade/entities/unidade.entity';
 import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum TipoSanguineo {
@@ -42,4 +43,7 @@ export class PessoaFisica extends BaseEntity {
 
   @ManyToOne(() => Cargo, { eager: true })
   cargo: Cargo;
+
+  @ManyToOne(() => Unidade, { eager: true })
+  unidade: Unidade;
 }

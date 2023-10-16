@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { DesignacoesService } from './designacoes.service';
 import { CreateDesignacoeDto } from './dto/create-designacoe.dto';
@@ -26,24 +29,24 @@ export class DesignacoesController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
     @Query('search') search: string,
   ) {
-    return this.designacoesService.findAll();
+    return this.designacoesService.findAll({ page, limit }, search);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.designacoesService.findOne(+id);
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.designacoesService.findOne(id);
   }
 
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id', ParseIntPipe) id: number,
     @Body() updateDesignacoeDto: UpdateDesignacoeDto,
   ) {
-    return this.designacoesService.update(+id, updateDesignacoeDto);
+    return this.designacoesService.update(id, updateDesignacoeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.designacoesService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.designacoesService.remove(id);
   }
 }

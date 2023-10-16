@@ -16,6 +16,7 @@ import { Cargo } from 'src/cargo/entities/cargo.entity';
 import { Genero } from 'src/genero/entities/genero.entity';
 import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 import { TipoSanguineo, TipoSexo } from '../entities/pessoa-fisica.entity';
+import { Unidade } from 'src/unidade/entities/unidade.entity';
 
 export class CreatePessoaFisicaDto {
   @IsString()
@@ -52,21 +53,9 @@ export class CreatePessoaFisicaDto {
   @IsNotEmptyObject()
   cargo: Cargo;
 
-  /* @ValidateNested({ each: true })
-  @Type(() => CreateEnderecoDto)
-  @IsArray()
-  @IsOptional()
-  enderecos?: Endereco[]; */
-
-  /* @ValidateNested({ each: true })
-  @Type(() => CreateTelefoneDto)
-  @IsArray()
-  @IsOptional()
-  telefones?: Telefone[]; */
-
-  /* @ValidateNested()
-  @Type(() => CreateEmailDto)
-  @IsArray()
-  @IsOptional()
-  emails?: Email[]; */
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
+  @IsObject()
+  @IsNotEmptyObject()
+  unidade: Unidade;
 }
