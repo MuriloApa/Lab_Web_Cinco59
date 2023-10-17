@@ -3,7 +3,7 @@ import { Servidor, TipoClasse } from '../entities/servidor.entity';
 import {
   IsArray,
   IsBoolean,
-  IsDate,
+  IsDateString,
   IsEnum,
   IsInt,
   IsNotEmpty,
@@ -31,7 +31,7 @@ export class CreateServidorDto {
   @IsNotEmpty()
   matricula: number;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   dataPosse: Date;
 

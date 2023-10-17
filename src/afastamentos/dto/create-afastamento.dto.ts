@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-  IsDate,
+  IsDateString,
   IsDefined,
   IsInt,
   IsNotEmpty,
@@ -29,7 +29,7 @@ export class CreateAfastamentoDto {
   @IsDefined()
   indisponibilidade: Indisponibilidade;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   dataInicio: Date;
 

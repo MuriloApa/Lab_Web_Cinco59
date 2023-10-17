@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-  IsDate,
+  IsDateString,
   IsDefined,
   IsEnum,
   IsNotEmpty,
@@ -29,7 +29,7 @@ export class CreatePessoaFisicaDto {
   @IsNotEmpty()
   nome: string;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   dataNascimento: Date;
 
