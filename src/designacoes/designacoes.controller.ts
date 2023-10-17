@@ -17,7 +17,9 @@ import { UpdateDesignacoeDto } from './dto/update-designacoe.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('designacoes')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('designacoes')

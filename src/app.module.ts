@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { GeneroModule } from './genero/genero.module';
 import { EmailModule } from './email/email.module';
 import { CargoModule } from './cargo/cargo.module';
@@ -52,7 +50,7 @@ import { UsersModule } from './auth/users/users.module';
     DesignacoesModule,
     UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
+  controllers: [],
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}

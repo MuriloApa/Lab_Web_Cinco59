@@ -18,7 +18,9 @@ import { UsersService } from './users.service';
 import { RolesGuard } from '../guards/roles.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('user')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('users')

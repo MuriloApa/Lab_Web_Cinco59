@@ -16,9 +16,11 @@ import { CreateAfastamentoDto } from './dto/create-afastamento.dto';
 import { UpdateAfastamentoDto } from './dto/update-afastamento.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards()
 @Controller('afastamentos')
+@ApiTags('afastamentos')
 export class AfastamentosController {
   constructor(private readonly afastamentosService: AfastamentosService) {}
 

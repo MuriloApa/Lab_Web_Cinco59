@@ -17,7 +17,9 @@ import { UpdateEstadoDto } from './dto/update-estado.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('estado')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('estado')

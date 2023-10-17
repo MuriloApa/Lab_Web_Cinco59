@@ -17,7 +17,9 @@ import { UpdatePaisDto } from './dto/update-pais.dto';
 import { Role } from 'src/shared/enums/roles.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('pais')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('pais')

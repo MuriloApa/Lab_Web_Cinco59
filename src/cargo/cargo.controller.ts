@@ -17,7 +17,9 @@ import { UpdateCargoDto } from './dto/update-cargo.dto';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('cargo')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('cargo')

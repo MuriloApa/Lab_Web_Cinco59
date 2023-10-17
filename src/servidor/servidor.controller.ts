@@ -16,7 +16,9 @@ import { CreateServidorDto } from './dto/create-servidor.dto';
 import { UpdateServidorDto } from './dto/update-servidor.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('servidor')
 @UseGuards()
 @Controller('servidor')
 export class ServidorController {

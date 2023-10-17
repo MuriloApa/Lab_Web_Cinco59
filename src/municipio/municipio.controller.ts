@@ -17,7 +17,9 @@ import { UpdateMunicipioDto } from './dto/update-municipio.dto';
 import { Role } from 'src/shared/enums/roles.enum';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('municipio')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('municipio')

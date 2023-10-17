@@ -17,7 +17,9 @@ import { UpdateGeneroDto } from './dto/update-genero.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
 import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('genero')
 @Roles(Role.ADMIN)
 @UseGuards(RolesGuard)
 @Controller('genero')
