@@ -35,6 +35,14 @@ export class FuncaoService {
     return paginate<Funcao>(this.repository, options, where);
   }
 
+  findAllForced(options: IPaginationOptions): Promise<Pagination<Funcao>> {
+    const resultado = this.repository
+      .createQueryBuilder('unidade')
+      .orderBy('unidade.ordenacaoForcada', 'ASC');
+
+    return paginate<Funcao>(resultado, options);
+  }
+
   findOne(id: number): Promise<Funcao> {
     const funcao = this.repository.findOneBy({ id });
 

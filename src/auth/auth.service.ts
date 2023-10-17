@@ -1,15 +1,17 @@
 import { Injectable } from '@nestjs/common';
-import { UsuariosService } from './usuarios/usuarios.service';
+
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
-import { Usuario } from './usuarios/entities/usuario.entity';
+
 import { UserToken } from './models/user-token.model';
 import { UserPayload } from './models/user-payload.model';
+import { User } from './users/entities/user.entity';
+import { UsersService } from './users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly usuariosService: UsuariosService,
+    private readonly usuariosService: UsersService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -17,22 +19,21 @@ export class AuthService {
     const user = await this.usuariosService.findByEmail(email, true);
 
     if (user) {
-      const isPasswordValid = await compareSync(password, user.senha);
+      const isPasswordValid = await compareSync(password, user.password);
 
       if (isPasswordValid) {
-        const { senha, ...result } = user;
-        return result as Usuario;
+        const { password, ...result } = user;
+        return result as User;
       }
     }
 
     return null;
   }
 
-  async login(user: Usuario): Promise<UserToken> {
+  async login(user: User): Promise<UserToken> {
     const playload: UserPayload = {
       sub: user.id,
       email: user.email,
-      pessoa: user.pessoa,
     };
 
     return {

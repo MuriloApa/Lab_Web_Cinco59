@@ -1,6 +1,8 @@
 import { Type } from 'class-transformer';
 import {
+  IsArray,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsObject,
   IsOptional,
@@ -12,23 +14,28 @@ import {
 } from 'class-validator';
 import { PessoaFisica } from 'src/pessoa-fisica/entities/pessoa-fisica.entity';
 import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
+import { Role } from 'src/shared/enums/roles.enum';
 
-export class CreateUsuarioDto {
+export class CreateUserDto {
   @IsEmail()
-  @IsNotEmpty()
   email: string;
 
   @IsString()
   @MinLength(4)
   @MaxLength(20)
   @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'senha muito fraca',
+    message: 'password too weak',
   })
-  senha: string;
+  password: string;
 
   @ValidateNested()
-  @IsObject()
-  @IsOptional()
   @Type(() => RelationEntityDto)
-  pessoa?: PessoaFisica;
+  @IsOptional()
+  @IsObject()
+  pessoaAssociada: PessoaFisica;
+
+  @IsArray()
+  @IsNotEmpty()
+  @IsEnum(Role, { each: true })
+  roles: number[];
 }

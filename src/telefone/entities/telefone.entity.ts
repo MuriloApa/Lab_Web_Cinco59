@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/shared/entities';
-import { Column, Entity } from 'typeorm';
+import { Unidade } from 'src/unidade/entities/unidade.entity';
+import { Column, Entity, ManyToOne } from 'typeorm';
 
 export enum TipoTelefone {
   PESSOAL = 'Pessoal',
@@ -19,4 +20,7 @@ export class Telefone extends BaseEntity {
     default: TipoTelefone.PESSOAL,
   })
   tipo: TipoTelefone;
+
+  @ManyToOne(() => Unidade, { nullable: true })
+  unidade: Unidade;
 }

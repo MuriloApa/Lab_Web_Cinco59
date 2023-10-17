@@ -35,6 +35,14 @@ export class CargoService {
     return paginate<Cargo>(this.repository, options, where);
   }
 
+  findAllForced(options: IPaginationOptions): Promise<Pagination<Cargo>> {
+    const resultado = this.repository
+      .createQueryBuilder('cargo')
+      .orderBy('cargo.ordenacaoForcada', 'ASC');
+
+    return paginate<Cargo>(resultado, options);
+  }
+
   async findOne(id: number): Promise<Cargo> {
     const cargo = await this.repository.findOneBy({ id });
 

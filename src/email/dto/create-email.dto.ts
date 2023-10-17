@@ -12,6 +12,8 @@ import { TipoEmail } from '../entities/email.entity';
 import { Type } from 'class-transformer';
 import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 import { Terceirizado } from 'src/terceirizado/entities/terceirizado.entity';
+import { Servidor } from 'src/servidor/entities/servidor.entity';
+import { Unidade } from 'src/unidade/entities/unidade.entity';
 
 export class CreateEmailDto {
   @IsEmail()
@@ -32,5 +34,17 @@ export class CreateEmailDto {
   @Type(() => RelationEntityDto)
   @IsObject()
   @IsOptional()
-  proprietario?: Terceirizado;
+  proprietarioTerceirizado?: Terceirizado;
+
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
+  @IsObject()
+  @IsOptional()
+  proprietarioServidor?: Servidor;
+
+  @ValidateNested()
+  @Type(() => RelationEntityDto)
+  @IsObject()
+  @IsOptional()
+  unidade: Unidade;
 }

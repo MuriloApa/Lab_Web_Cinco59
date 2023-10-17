@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { IndisponibilidadesService } from './indisponibilidades.service';
 import { CreateIndisponibilidadeDto } from './dto/create-indisponibilidade.dto';
 import { UpdateIndisponibilidadeDto } from './dto/update-indisponibilidade.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('indisponibilidades')
 export class IndisponibilidadesController {
   constructor(

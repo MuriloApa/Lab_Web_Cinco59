@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-    IsArray,
+  IsArray,
   IsBoolean,
   IsDefined,
   IsInt,
@@ -20,6 +20,7 @@ import { Telefone } from 'src/telefone/entities/telefone.entity';
 import { CreateEnderecoDto } from 'src/endereco/dto/create-endereco.dto';
 import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { Email } from 'src/email/entities/email.entity';
+import { CreateEmailDto } from 'src/email/dto/create-email.dto';
 
 export class CreateUnidadeDto {
   @IsString()
@@ -56,12 +57,13 @@ export class CreateUnidadeDto {
 
   @ValidateNested()
   @Type(() => CreateEnderecoDto)
-  @IsArray()
-  @IsOptional()
-  enderecos?: Endereco[];
+  @IsObject()
+  @IsDefined()
+  @IsNotEmptyObject()
+  endereco: Endereco;
 
   @ValidateNested()
-  @Type(() => CreateEnderecoDto)
+  @Type(() => CreateEmailDto)
   @IsObject()
   @IsDefined()
   @IsNotEmptyObject()

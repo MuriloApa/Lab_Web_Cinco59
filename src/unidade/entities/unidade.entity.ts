@@ -2,14 +2,7 @@ import { Email } from 'src/email/entities/email.entity';
 import { Endereco } from 'src/endereco/entities/endereco.entity';
 import { BaseEntity } from 'src/shared/entities';
 import { Telefone } from 'src/telefone/entities/telefone.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-  OneToOne,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
 export class Unidade extends BaseEntity {
@@ -28,16 +21,11 @@ export class Unidade extends BaseEntity {
   @Column()
   ordenacaoForcada: number;
 
-  @ManyToMany(() => Telefone, {
-    cascade: true,
-    eager: true,
-    onDelete: 'CASCADE',
-  })
-  @JoinTable({ name: 'telefones_terceirizado' })
+  @OneToMany(() => Telefone, (telefone) => telefone.unidade, { eager: true })
   telefones?: Telefone[];
 
   @ManyToOne(() => Endereco, { eager: true })
-  enderecos?: Endereco[];
+  endereco: Endereco;
 
   @OneToOne(() => Email)
   emails: Email;

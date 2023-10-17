@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { MunicipioService } from './municipio.service';
 import { CreateMunicipioDto } from './dto/create-municipio.dto';
 import { UpdateMunicipioDto } from './dto/update-municipio.dto';
+import { Role } from 'src/shared/enums/roles.enum';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('municipio')
 export class MunicipioController {
   constructor(private readonly municipioService: MunicipioService) {}

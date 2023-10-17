@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CargoService } from './cargo.service';
 import { CreateCargoDto } from './dto/create-cargo.dto';
 import { UpdateCargoDto } from './dto/update-cargo.dto';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('cargo')
 export class CargoController {
   constructor(private readonly cargoService: CargoService) {}
@@ -30,6 +36,14 @@ export class CargoController {
     @Query('search') search: string,
   ) {
     return this.cargoService.findAll({ page, limit }, search);
+  }
+
+  @Get(':ordenacaoForcada')
+  findAllForced(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,
+  ) {
+    return this.cargoService.findAllForced({ page, limit });
   }
 
   @Get(':id')

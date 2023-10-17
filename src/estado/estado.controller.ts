@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { EstadoService } from './estado.service';
 import { CreateEstadoDto } from './dto/create-estado.dto';
 import { UpdateEstadoDto } from './dto/update-estado.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('estado')
 export class EstadoController {
   constructor(private readonly estadoService: EstadoService) {}

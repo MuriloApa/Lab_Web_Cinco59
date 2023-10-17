@@ -5,21 +5,21 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { CurrentUser } from 'src/shared/decorators/current-user.decorator';
+
 import { AuthService } from './auth.service';
-import { Usuario } from './usuarios/entities/usuario.entity';
-import { IsPublic } from 'src/shared/decorators/is-public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
+import { User } from './users/entities/user.entity';
+import { CurrentUser, IsPublic } from 'src/shared/decorators';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post(':login')
+  @IsPublic()
+  @Post('login')
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
-  @IsPublic()
-  login(@CurrentUser() user: Usuario) {
+  login(@CurrentUser() user: User) {
     return this.authService.login(user);
   }
 }

@@ -9,20 +9,26 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { AfastamentosService } from './afastamentos.service';
 import { CreateAfastamentoDto } from './dto/create-afastamento.dto';
 import { UpdateAfastamentoDto } from './dto/update-afastamento.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
 
+@UseGuards()
 @Controller('afastamentos')
 export class AfastamentosController {
   constructor(private readonly afastamentosService: AfastamentosService) {}
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() createAfastamentoDto: CreateAfastamentoDto) {
     return this.afastamentosService.create(createAfastamentoDto);
   }
 
+  @Roles(Role.ADMIN)
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -32,6 +38,7 @@ export class AfastamentosController {
     return this.afastamentosService.findAll({ page, limit }, search);
   }
 
+  @Roles(Role.COMUM)
   @Get(':porPeriodo')
   findPeriodo(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -46,11 +53,13 @@ export class AfastamentosController {
     );
   }
 
+  @Roles(Role.COMUM)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.afastamentosService.findOne(id);
   }
 
+  @Roles(Role.ADMIN)
   @Patch(':id')
   update(
     @Param('id', ParseIntPipe) id: number,
@@ -59,6 +68,7 @@ export class AfastamentosController {
     return this.afastamentosService.update(id, updateAfastamentoDto);
   }
 
+  @Roles(Role.ADMIN)
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.afastamentosService.remove(id);

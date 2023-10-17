@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { PaisService } from './pais.service';
 import { CreatePaisDto } from './dto/create-pais.dto';
 import { UpdatePaisDto } from './dto/update-pais.dto';
+import { Role } from 'src/shared/enums/roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Roles } from 'src/shared/decorators/roles.decorator';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('pais')
 export class PaisController {
   constructor(private readonly paisService: PaisService) {}

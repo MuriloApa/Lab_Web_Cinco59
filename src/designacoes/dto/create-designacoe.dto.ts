@@ -51,7 +51,7 @@ export class CreateDesignacoeDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(1)
+  @MinLength(20)
   processoSei: string;
 
   @IsInt()

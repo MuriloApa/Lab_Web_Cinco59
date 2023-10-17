@@ -1,13 +1,20 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { UsuariosService } from './auth/usuarios/usuarios.service';
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { ValidationError } from 'class-validator';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const usuarioService = app.get(UsuariosService);
-  usuarioService.usuario_padrao();
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      exceptionFactory: (validationErrors: ValidationError[] = []) => {
+        return new BadRequestException(validationErrors);
+      },
+    }),
+  );
 
   const config = new DocumentBuilder()
     .setTitle('Projeto Cinco59')

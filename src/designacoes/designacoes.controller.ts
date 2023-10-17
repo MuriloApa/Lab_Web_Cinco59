@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { DesignacoesService } from './designacoes.service';
 import { CreateDesignacoeDto } from './dto/create-designacoe.dto';
 import { UpdateDesignacoeDto } from './dto/update-designacoe.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('designacoes')
 export class DesignacoesController {
   constructor(private readonly designacoesService: DesignacoesService) {}

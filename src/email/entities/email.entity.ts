@@ -2,6 +2,7 @@ import { PessoaFisica } from 'src/pessoa-fisica/entities/pessoa-fisica.entity';
 import { Servidor } from 'src/servidor/entities/servidor.entity';
 import { BaseEntity } from 'src/shared/entities';
 import { Terceirizado } from 'src/terceirizado/entities/terceirizado.entity';
+import { Unidade } from 'src/unidade/entities/unidade.entity';
 import { Column, Entity, ManyToOne, Unique } from 'typeorm';
 
 export enum TipoEmail {
@@ -34,4 +35,7 @@ export class Email extends BaseEntity {
 
   @ManyToOne(() => Servidor, { nullable: true })
   proprietarioServidor: Servidor;
+
+  @ManyToOne(() => Unidade, { nullable: true })
+  unidade: Unidade;
 }

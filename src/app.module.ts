@@ -22,6 +22,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { IndisponibilidadesModule } from './indisponibilidades/indisponibilidades.module';
 import { AfastamentosModule } from './afastamentos/afastamentos.module';
 import { DesignacoesModule } from './designacoes/designacoes.module';
+import { UsersModule } from './auth/users/users.module';
 
 @Module({
   imports: [
@@ -49,8 +50,9 @@ import { DesignacoesModule } from './designacoes/designacoes.module';
     IndisponibilidadesModule,
     AfastamentosModule,
     DesignacoesModule,
+    UsersModule,
   ],
   controllers: [AppController],
-  providers: [AppService/* , { provide: APP_GUARD, useClass: JwtAuthGuard } */],
+  providers: [AppService, { provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}

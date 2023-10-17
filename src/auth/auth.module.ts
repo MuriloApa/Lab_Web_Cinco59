@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { UsuariosModule } from './usuarios/usuarios.module';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
-    UsuariosModule,
+    UsersModule,
     JwtModule.registerAsync({
       useFactory: (configService: ConfigService) => {
         return {

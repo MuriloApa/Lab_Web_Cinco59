@@ -9,11 +9,17 @@ import {
   Query,
   ParseIntPipe,
   DefaultValuePipe,
+  UseGuards,
 } from '@nestjs/common';
 import { GeneroService } from './genero.service';
 import { CreateGeneroDto } from './dto/create-genero.dto';
 import { UpdateGeneroDto } from './dto/update-genero.dto';
+import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Role } from 'src/shared/enums/roles.enum';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
+@Roles(Role.ADMIN)
+@UseGuards(RolesGuard)
 @Controller('genero')
 export class GeneroController {
   constructor(private readonly generoService: GeneroService) {}
