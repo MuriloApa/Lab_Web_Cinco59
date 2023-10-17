@@ -39,7 +39,7 @@ export class TerceirizadoController {
     return this.terceirizadoService.findAll({ page, limit }, search);
   }
 
-  @Roles(Role.COMUM)
+  @Roles(Role.COMUM, Role.ADMIN)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.terceirizadoService.findOne(id);

@@ -38,7 +38,7 @@ export class AfastamentosController {
     return this.afastamentosService.findAll({ page, limit }, search);
   }
 
-  @Roles(Role.COMUM)
+  @Roles(Role.COMUM, Role.ADMIN)
   @Get(':porPeriodo')
   findPeriodo(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
@@ -53,7 +53,7 @@ export class AfastamentosController {
     );
   }
 
-  @Roles(Role.COMUM)
+  @Roles(Role.COMUM, Role.ADMIN)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.afastamentosService.findOne(id);

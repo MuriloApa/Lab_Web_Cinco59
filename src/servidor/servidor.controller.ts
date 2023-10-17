@@ -38,7 +38,7 @@ export class ServidorController {
     return this.servidorService.findAll({ page, limit }, search);
   }
 
-  @Roles(Role.COMUM)
+  @Roles(Role.COMUM, Role.ADMIN)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.servidorService.findOne(id);
