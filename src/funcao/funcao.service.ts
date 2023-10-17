@@ -10,15 +10,20 @@ import {
   paginate,
 } from 'nestjs-typeorm-paginate';
 import { RecordnotfoundException } from '@exceptions';
+import { Telefone } from 'src/telefone/entities/telefone.entity';
 
 @Injectable()
 export class FuncaoService {
   constructor(
     @InjectRepository(Funcao) private readonly repository: Repository<Funcao>,
+    @InjectRepository(Telefone)
+    private readonly telefoneRepository: Repository<Telefone>,
   ) {}
 
   async create(createFuncaoDto: CreateFuncaoDto): Promise<Funcao> {
     const funcao = this.repository.create(createFuncaoDto);
+    const telefone = this.telefoneRepository.create(createFuncaoDto.telefone);
+    funcao.telefone = await this.telefoneRepository.save(telefone);
     return await this.repository.save(funcao);
   }
 

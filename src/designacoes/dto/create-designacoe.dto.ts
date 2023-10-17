@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import {
-  IsDate,
+  IsDateString,
   IsDefined,
   IsInt,
   IsNotEmpty,
@@ -30,7 +30,7 @@ export class CreateDesignacoeDto {
   @IsNotEmptyObject()
   funcao: Funcao;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   dataDesignacao: Date;
 
@@ -59,7 +59,7 @@ export class CreateDesignacoeDto {
   @IsNotEmpty()
   documentoSei: number;
 
-  @IsDate()
+  @IsDateString()
   @IsNotEmpty()
   dataDispensa: Date;
 }
