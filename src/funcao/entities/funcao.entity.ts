@@ -20,7 +20,7 @@ export class Funcao extends BaseEntity {
   @Column()
   ativa: boolean;
 
-  @OneToOne(() => Telefone, { nullable: true })
+  @OneToOne(() => Telefone, { nullable: true, eager: true })
   @JoinColumn()
   telefone?: Telefone;
 }

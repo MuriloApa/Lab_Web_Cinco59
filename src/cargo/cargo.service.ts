@@ -27,7 +27,7 @@ export class CargoService {
     search?: string,
   ): Promise<Pagination<Cargo>> {
     const where: FindManyOptions<Cargo> = {};
-
+    
     if (search) {
       where.where = [{ nome: ILike(`%${search}%`) }];
     }
@@ -45,7 +45,7 @@ export class CargoService {
 
   async findOne(id: number): Promise<Cargo> {
     const cargo = await this.repository.findOneBy({ id });
-
+    
     if (!cargo) {
       throw new RecordnotfoundException();
     }

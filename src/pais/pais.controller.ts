@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('pais')
 @Roles(Role.ADMIN)
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('pais')
 export class PaisController {
   constructor(private readonly paisService: PaisService) {}

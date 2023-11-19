@@ -59,13 +59,17 @@ export class FuncaoService {
   }
 
   async update(id: number, updateFuncaoDto: UpdateFuncaoDto): Promise<Funcao> {
-    await this.repository.update(id, updateFuncaoDto);
+    const funcao = await this.repository.findOneBy({ id });
+    const { telefone, ...updateFuncao } = updateFuncaoDto;
+    await this.telefoneRepository.update(funcao.telefone.id, telefone);
+    await this.repository.update(id, updateFuncao);
     return this.findOne(id);
   }
 
   async remove(id: number): Promise<boolean> {
+    const aux = await this.repository.findOneBy({ id });
     const funcao = await this.repository.delete(id);
-
+    await this.telefoneRepository.delete(aux.telefone.id);
     if (!funcao?.affected) {
       throw new RecordnotfoundException();
     }

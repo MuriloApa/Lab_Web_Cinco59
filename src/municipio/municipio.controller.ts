@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('municipio')
 @Roles(Role.ADMIN)
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('municipio')
 export class MunicipioController {
   constructor(private readonly municipioService: MunicipioService) {}

@@ -40,5 +40,5 @@ export class CreateFuncaoDto {
   @ValidateNested()
   @Type(() => CreateTelefoneDto)
   @IsOptional()
-  telefone: Telefone;
+  telefone?: Telefone;
 }

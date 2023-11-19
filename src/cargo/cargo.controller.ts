@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('cargo')
 @Roles(Role.ADMIN)
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('cargo')
 export class CargoController {
   constructor(private readonly cargoService: CargoService) {}
@@ -40,7 +40,7 @@ export class CargoController {
     return this.cargoService.findAll({ page, limit }, search);
   }
 
-  @Get(':ordenacaoForcada')
+  @Get('forced')
   findAllForced(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,

@@ -40,7 +40,7 @@ export class UnidadeController {
     return this.unidadeService.findAll({ page, limit }, search);
   }
 
-  @Get(':ordenacaoForcada')
+  @Get('ordenacaoForcada')
   findAllForced(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,

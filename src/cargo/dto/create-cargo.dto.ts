@@ -23,5 +23,5 @@ export class CreateCargoDto {
 
   @IsBoolean()
   @IsNotEmpty()
-  ativa: boolean;
+  ativo: boolean;
 }
