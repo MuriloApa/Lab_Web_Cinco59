@@ -30,12 +30,15 @@ export class Email extends BaseEntity {
   @Column({ type: 'varchar', enum: TipoEmail, default: TipoEmail.PROFISSIONAL })
   tipo: TipoEmail;
 
-  @ManyToOne(() => Terceirizado, { nullable: true })
+  @ManyToOne(() => Terceirizado, { nullable: true, onDelete: 'CASCADE' })
   proprietarioTerceirizado: Terceirizado;
 
-  @ManyToOne(() => Servidor, { nullable: true })
+  @ManyToOne(() => Servidor, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
   proprietarioServidor: Servidor;
 
-  @ManyToOne(() => Unidade, { nullable: true })
+  @ManyToOne(() => Unidade, { nullable: true, onDelete: 'CASCADE' })
   unidade: Unidade;
 }

@@ -19,7 +19,7 @@ import { Role } from 'src/shared/enums/roles.enum';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('servidor')
-@UseGuards()
+//@UseGuards()
 @Controller('servidor')
 export class ServidorController {
   constructor(private readonly servidorService: ServidorService) {}

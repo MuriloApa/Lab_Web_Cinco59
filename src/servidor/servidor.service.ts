@@ -40,12 +40,12 @@ export class ServidorService {
       servidor.telefones.push(this.telefoneRepository.create(telefone));
     });
 
-    servidor.emails = [];
+    /* servidor.emails = [];
     createServidorDto.emails?.forEach((email) => {
       const e_mail = this.emailRepository.create(email);
       servidor.emails.push(e_mail);
       this.emailRepository.save(e_mail);
-    });
+    }); */
 
     const proprietario = await this.repository.save(servidor);
     proprietario.emails.forEach((email) => {
@@ -93,6 +93,12 @@ export class ServidorService {
   }
 
   async remove(id: number): Promise<boolean> {
+    /* await this.repository
+      .createQueryBuilder('auxiliar')
+      .delete()
+      .from('enderecos_servidores')
+      .where('servidorId = :id', { id })
+      .execute(); */
     const servidor = await this.repository.delete(id);
 
     if (!servidor?.affected) {

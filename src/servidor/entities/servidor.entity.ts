@@ -69,6 +69,8 @@ export class Servidor extends PessoaFisica {
 
   @OneToMany(() => Email, (email) => email.proprietarioServidor, {
     eager: true,
+    cascade: true,
+    onDelete: 'CASCADE',
   })
   emails?: Email[];
 }

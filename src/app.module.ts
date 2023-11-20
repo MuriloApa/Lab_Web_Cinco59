@@ -37,6 +37,7 @@ import { UsersModule } from './auth/users/users.module';
       database: 'database/banco.sqlite',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
+      logging: 'all',
     }),
     ServidorModule,
     TerceirizadoModule,

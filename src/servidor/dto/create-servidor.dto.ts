@@ -55,13 +55,13 @@ export class CreateServidorDto {
   chefe?: Servidor;
 
   @ValidateNested({ each: true })
-  @Type(() => Servidor)
+  @Type(() => RelationEntityDto)
   @IsOptional()
   @IsArray()
   servidoresSubordinados?: Servidor[];
 
   @ValidateNested({ each: true })
-  @Type(() => Terceirizado)
+  @Type(() => RelationEntityDto)
   @IsOptional()
   @IsArray()
   terceirizadosSubordinados?: Terceirizado[];

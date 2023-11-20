@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('genero')
 @Roles(Role.ADMIN)
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('genero')
 export class GeneroController {
   constructor(private readonly generoService: GeneroService) {}
