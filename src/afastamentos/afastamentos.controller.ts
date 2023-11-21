@@ -17,8 +17,9 @@ import { UpdateAfastamentoDto } from './dto/update-afastamento.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
 import { ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
-@UseGuards()
+@UseGuards(RolesGuard)
 @Controller('afastamentos')
 @ApiTags('afastamentos')
 export class AfastamentosController {

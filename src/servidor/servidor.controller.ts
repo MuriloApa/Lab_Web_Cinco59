@@ -17,9 +17,10 @@ import { UpdateServidorDto } from './dto/update-servidor.dto';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { Role } from 'src/shared/enums/roles.enum';
 import { ApiTags } from '@nestjs/swagger';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
 
 @ApiTags('servidor')
-//@UseGuards()
+@UseGuards(RolesGuard)
 @Controller('servidor')
 export class ServidorController {
   constructor(private readonly servidorService: ServidorService) {}

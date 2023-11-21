@@ -21,7 +21,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('funcao')
 @Roles(Role.ADMIN)
-///@UseGuards(RolesGuard)
+@UseGuards(RolesGuard)
 @Controller('funcao')
 export class FuncaoController {
   constructor(private readonly funcaoService: FuncaoService) {}
