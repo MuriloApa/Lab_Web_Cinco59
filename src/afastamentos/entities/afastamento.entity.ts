@@ -5,10 +5,10 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Afastamento extends BaseEntity {
-  @ManyToOne(() => Servidor)
+  @ManyToOne(() => Servidor, { eager: true })
   servidor: Servidor;
 
-  @ManyToOne(() => Indisponibilidade)
+  @ManyToOne(() => Indisponibilidade, { eager: true })
   indisponibilidade: Indisponibilidade;
 
   @Column()

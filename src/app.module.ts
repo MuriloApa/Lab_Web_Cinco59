@@ -52,6 +52,6 @@ import { UsersModule } from './auth/users/users.module';
     UsersModule,
   ],
   controllers: [],
-  //providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }],
 })
 export class AppModule {}

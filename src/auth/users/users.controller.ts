@@ -22,7 +22,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('user')
 @Roles(Role.ADMIN)
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
