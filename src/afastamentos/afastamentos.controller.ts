@@ -42,7 +42,7 @@ export class AfastamentosController {
   }
 
   @Roles(Role.COMUM, Role.ADMIN)
-  @Get(':porPeriodo')
+  @Get('/porPeriodo')
   findPeriodo(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,

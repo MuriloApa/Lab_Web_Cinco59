@@ -40,7 +40,7 @@ export class CargoController {
     return this.cargoService.findAll({ page, limit }, search);
   }
 
-  @Get('forced')
+  @Get('/forced')
   findAllForced(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number = 10,

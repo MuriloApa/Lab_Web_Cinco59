@@ -40,8 +40,8 @@ export class UnidadeService {
     await this.enderecoRepository.save(endereco);
     unidade.endereco = endereco;
 
-    unidade.emails = this.emailRepository.create(createUnidadeDto.emails);
-    await this.emailRepository.save(unidade.emails);
+    unidade.email = this.emailRepository.create(createUnidadeDto.email);
+    await this.emailRepository.save(unidade.email);
 
     const proprietario = await this.repository.save(unidade);
     proprietario.telefones.forEach((telefone) => {
@@ -95,6 +95,14 @@ export class UnidadeService {
   }
 
   async remove(id: number): Promise<boolean> {
+    const aux = await this.repository.findOneBy({ id });
+
+    aux.telefones.forEach(async (telefone) => {
+      await this.telefoneRepository.delete(telefone.id);
+    });
+
+    await this.emailRepository.delete(aux.email.id);
+
     const unidade = await this.repository.delete(id);
 
     if (!unidade?.affected) {

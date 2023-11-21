@@ -67,5 +67,5 @@ export class CreateUnidadeDto {
   @IsObject()
   @IsDefined()
   @IsNotEmptyObject()
-  emails: Email;
+  email: Email;
 }

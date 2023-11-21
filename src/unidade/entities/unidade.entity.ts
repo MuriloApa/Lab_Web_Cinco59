@@ -28,5 +28,5 @@ export class Unidade extends BaseEntity {
   endereco: Endereco;
 
   @OneToOne(() => Email)
-  emails: Email;
+  email: Email;
 }
