@@ -21,7 +21,7 @@ import { Role } from 'src/shared/enums/roles.enum';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('user')
-@UseGuards(RolesGuard)
+//@UseGuards(RolesGuard)
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -42,7 +42,7 @@ export class UsersController {
     return this.usersService.findAll({ page, limit }, search);
   }
 
-  @Roles(Role.COMUM)
+  @Roles(Role.COMUM, Role.ADMIN)
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.usersService.findOne(+id);
