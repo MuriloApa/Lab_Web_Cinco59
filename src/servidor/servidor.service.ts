@@ -58,9 +58,11 @@ export class ServidorService {
     const { servidoresSubordinados, ...aux } = servidor;
 
     const novoServidor = await this.repository.save(aux);
-    servidoresSubordinados.forEach((item) => {
-      this.repository.update({ id: item.id }, { chefe: novoServidor });
-    });
+    if (servidoresSubordinados != undefined && servidoresSubordinados != null) {
+      servidoresSubordinados?.forEach((item) => {
+        this.repository.update({ id: item.id }, { chefe: novoServidor });
+      });
+    }
 
     await this.repository.update(
       { id: novoServidor.id },
