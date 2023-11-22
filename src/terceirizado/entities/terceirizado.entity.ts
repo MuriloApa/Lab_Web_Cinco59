@@ -49,6 +49,6 @@ export class Terceirizado extends PessoaFisica {
   })
   emails?: Email[];
 
-  @ManyToOne(() => Servidor)
+  @ManyToOne(() => Servidor, { eager: true })
   supervisor: Servidor;
 }
